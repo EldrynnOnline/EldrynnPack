@@ -1,4 +1,4 @@
-name: Build & Publish Latest Resource Pack (stable link)
+name: Build & Publish Latest Resource Pack
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create resource pack zip (stable filename)
+      - name: Create resource pack zip
         run: |
           set -euo pipefail
 
@@ -35,7 +35,7 @@ jobs:
 
           echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
 
-      - name: Create or update the fixed release (tag: latest)
+      - name: Create or update the fixed release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
