@@ -1,4 +1,4 @@
-name: Build & Release Resource Pack (commit SHA)
+name: Build & Publish Latest Resource Pack (stable link)
 
 on:
   push:
@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create resource pack zip
+      - name: Create resource pack zip (stable filename)
         run: |
           set -euo pipefail
 
-          SHORT_SHA="${GITHUB_SHA::7}"
-          ZIP_NAME="resourcepack-${SHORT_SHA}.zip"
+          ZIP_NAME="EldrynnPack.zip"
 
+          # Zip everything except repo/CI metadata and common non-pack files.
           zip -r "$ZIP_NAME" . \
             -x ".git/*" \
             -x ".github/*" \
@@ -34,15 +34,36 @@ jobs:
             -x "**/Thumbs.db"
 
           echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
-          echo "TAG=commit-${GITHUB_SHA}" >> "$GITHUB_ENV"
-          echo "TITLE=Commit ${SHORT_SHA}" >> "$GITHUB_ENV"
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.TAG }}
-          name: ${{ env.TITLE }}
-          files: ${{ env.ZIP_NAME }}
-          generate_release_notes: true
-          prerelease: false
-          fail_on_unmatched_files: true
+      - name: Create or update the fixed release (tag: latest)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          TAG="latest"
+          TITLE="Latest dev build"
+          NOTES="Auto-updated from dev.\n\nCommit: ${GITHUB_SHA}"
+
+          # Create the release if it doesn't exist; otherwise update its title/notes.
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release edit "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "$TITLE" \
+              --notes "$NOTES"
+          else
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "dev" \
+              --title "$TITLE" \
+              --notes "$NOTES"
+          fi
+
+      - name: Upload asset (replace in-place)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release upload "latest" "${{ env.ZIP_NAME }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --clobber
