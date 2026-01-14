@@ -1,0 +1,28 @@
+Hard replacement items will be OVERIDING the original model and thus DO NOT need a custom command to summon
+This only effects former ALTERNATIVE models which now can be attached to ANY item
+
+
+You can summon ANY listing below on any item via the command:
+
+(replace every <>)
+/give @s minecraft:<item>[minecraft:item_model="<any below listed entry>"] 1
+
+custom:musketeer
+custom:regalhat
+custom:wizardnosehat
+custom:redwizardhat
+custom:bluewizardhat
+custom:yanbasword (Needs fixed. Shielding broken between updates.)
+custom:pointer
+custom:pontiffhat
+
+custom:realpie
+magic:hexagon
+magic:hexagon_nocircle
+magic:moon
+magic:moon_spiral
+magic:spiral
+magic:spiral_nocircle
+magic::star
+magic:star_noglow
+magic:star_ring_noglow

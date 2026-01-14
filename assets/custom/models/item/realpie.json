@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"particle": "custom:item/realpie",
+		"layer0": "custom:item/realpie"
+	}
+}
