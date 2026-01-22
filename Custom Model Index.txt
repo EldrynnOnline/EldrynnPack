@@ -5,18 +5,21 @@ This only effects former ALTERNATIVE models which now can be attached to ANY ite
 You can summon ANY listing below on any item via the command:
 
 (replace every <>)
-/give @s minecraft:<item>[minecraft:item_model="<any below listed entry>"] 1
+/minecraft:give @s minecraft:<item>[minecraft:item_model="<any below listed entry>"] 1
 
 custom:musketeer
 custom:regalhat
-custom:wizardnosehat
+custom:blackwizardnosehat
+custom:greywizardnosehat
 custom:redwizardhat
 custom:bluewizardhat
 custom:yanbasword (Needs fixed. Shielding broken between updates.)
 custom:pointer
 custom:pontiffhat
-
 custom:realpie
+custom:legalexplosivestaff
+custom:legalexplosivehat
+
 magic:hexagon
 magic:hexagon_nocircle
 magic:moon
