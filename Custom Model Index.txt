@@ -4,8 +4,11 @@ This only effects former ALTERNATIVE models which now can be attached to ANY ite
 
 You can summon ANY listing below on any item via the command:
 
-(replace every <>)
+(replace every pair of <> and their contents)
 /minecraft:give @s minecraft:<item>[minecraft:item_model="<any below listed entry>"] 1
+
+(for the dyed wizard hat specifically, Minecraft dyes use decimal versions of hexcode colors so a brief google "hexadecimal to decimal" should help.. or use mc stacker)
+/minecraft:give @s minecraft:carved_pumpkin[minecraft:item_model="custom:dyedwizardhat",minecraft:dyed_color=<color>]
 
 custom:musketeer
 custom:regalhat
@@ -19,6 +22,10 @@ custom:pontiffhat
 custom:realpie
 custom:legalexplosivestaff
 custom:legalexplosivehat
+custom:gutzsword
+custom:dyedwizardhat
+custom:tricorn
+custom:umbralblade
 
 magic:hexagon
 magic:hexagon_nocircle
